@@ -1,10 +1,6 @@
 #include "filemanager.h"
 #include "Main.h"
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
 void OpenFiles() 
 {
 
@@ -37,6 +33,6 @@ void CloseFiles()
 
 void ReadFile(FILE **filestream, char buffer[]) {
 
-  fscanf(*filestream, "%s", buffer);
+  fgets(buffer, 255, *filestream);
 
 }

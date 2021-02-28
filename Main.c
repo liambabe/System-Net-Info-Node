@@ -13,6 +13,10 @@ int main (int argc, char *argv[])
 
   printf("%s\n", memBuffer);
 
+  ReadFile(&memInfo, memBuffer);
+
+  printf("%s\n", memBuffer);
+
   CloseFiles();
 
 }
