@@ -3,19 +3,21 @@
 void OpenFiles() 
 {
 
-  memInfo = fopen(CombineFilePath(strdup(process), "meminfo"), "r");
+  char *memoryFilePath = CombineFilePath(strdup(process), "meminfo");
+  memInfo = fopen(memoryFilePath, "r");
   
   if (!memInfo) {
     printf("Failed to open memory file\n");
   }
 
+  free(memoryFilePath);
 }
 
 static char* CombineFilePath(char *folder, char *filename)
 {
   //Combine file path and file name
 
-  char* filePath;
+  char *filePath;
   filePath = malloc(strlen(folder)+1+strlen(filename));
   strcpy(filePath, folder); 
   strcat(filePath, filename); 
@@ -30,12 +32,18 @@ void CloseFiles()
 }
 
 
-void ReadFile(FILE **filestream, char buffer[]) 
+void ReadFile(FILE **filestream, struct Node* n, int lines) 
 {
-  int i = 0;  
 
-  while (fgets(buffer, 255, *filestream)) {
-    printf("%s", buffer);
+  char *buffer;
+
+  for (int i = 0; i < lines; i++) {
+
   }
+
+
+  /*while (fgets(buffer, 255, *filestream)) {
+    printf("%s", buffer);
+  }*/
 
 }

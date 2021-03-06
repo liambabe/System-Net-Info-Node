@@ -3,8 +3,10 @@
 
 /* Linked list for storing file information */
 struct Node {
+
     char data[255];
     struct Node* next;
+    
 };
 
 #endif
