@@ -5,13 +5,16 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "Main.h"
+
 // file control functions
 void OpenFiles();
 void CloseFiles();
 
 // input/output functions
-void ReadFile(FILE **filestream, char buffer[]);
+void ReadFile(FILE **filestream, char buffer[], int lines);
 
+// utility functions
 static char* CombineFilePath(char *folder, char *filename);
 
 #endif

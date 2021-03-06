@@ -1,5 +1,4 @@
 #include "filemanager.h"
-#include "Main.h"
 
 void OpenFiles() 
 {
@@ -31,8 +30,12 @@ void CloseFiles()
 }
 
 
-void ReadFile(FILE **filestream, char buffer[]) {
+void ReadFile(FILE **filestream, char buffer[]) 
+{
+  int i = 0;  
 
-  fgets(buffer, 255, *filestream);
+  while (fgets(buffer, 255, *filestream)) {
+    printf("%s", buffer);
+  }
 
 }
