@@ -1,6 +1,5 @@
 #include "filemanager.h"
 
-
 void OpenFiles() 
 {
 
