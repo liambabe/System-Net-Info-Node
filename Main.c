@@ -1,19 +1,21 @@
 #include "Main.h"
 
+
 const char process[6] = "/proc/";
 
 FILE *memInfo;
-char memBuffer[255] = "";
+struct Node *memHead = NULL;
 
 int main (int argc, char *argv[])
 {
+  memHead = (struct Node*) malloc(sizeof(struct Node));
+  strcpy(memHead->data, "Memory List");
+
   OpenFiles();
 
-  ReadFile(&memInfo, memBuffer);
-
-  printf("%s\n", memBuffer);
+  ReadFile(&memInfo, memHead, 5);
+  PrintList(memHead);
 
   CloseFiles();
-
 }
 

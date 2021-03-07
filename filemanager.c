@@ -1,26 +1,24 @@
 #include "filemanager.h"
-#include "Main.h"
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
 void OpenFiles() 
 {
 
-  memInfo = fopen(CombineFilePath(strdup(process), "meminfo"), "r");
+  char *memoryFilePath = CombineFilePath(strdup(process), "meminfo");
+  memInfo = fopen(memoryFilePath, "r");
   
   if (!memInfo) {
     printf("Failed to open memory file\n");
   }
 
+  free(memoryFilePath);
 }
+
 
 static char* CombineFilePath(char *folder, char *filename)
 {
   //Combine file path and file name
 
-  char* filePath;
+  char *filePath;
   filePath = malloc(strlen(folder)+1+strlen(filename));
   strcpy(filePath, folder); 
   strcat(filePath, filename); 
@@ -35,8 +33,18 @@ void CloseFiles()
 }
 
 
-void ReadFile(FILE **filestream, char buffer[]) {
+void ReadFile(FILE **filestream, struct Node* n, int lines) 
+{
 
-  fscanf(*filestream, "%s", buffer);
+  char buffer[255];
+  struct Node *currentNode = n;
 
+  for (int i = 0; i < lines; i++) {
+
+    fgets(buffer, 255, *filestream);
+    AddNode(currentNode, buffer);
+
+    currentNode = currentNode->next;
+
+  }
 }
