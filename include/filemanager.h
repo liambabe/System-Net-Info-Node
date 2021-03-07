@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 #include "Main.h"
-#include "filestructures.h"
+#include "linkedlist.h"
 
 // file control functions
 void OpenFiles();

@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #include "filemanager.h"
-#include "filestructures.h"
+#include "linkedlist.h"
 
 extern const char process[6];
 

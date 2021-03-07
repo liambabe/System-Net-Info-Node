@@ -37,15 +37,15 @@ void CloseFiles()
 void ReadFile(FILE **filestream, struct Node* n, int lines) 
 {
 
-  char *buffer;
-  buffer = malloc(sizeof(char) * 255);
+  char buffer[255];
+  struct Node *currentNode = n;
 
   for (int i = 0; i < lines; i++) {
 
     fgets(buffer, 255, *filestream);
-    printf("%s", buffer);
+    AddNode(currentNode, buffer);
+
+    currentNode = currentNode->next;
 
   }
-
-  free(buffer);
 }

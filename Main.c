@@ -1,5 +1,6 @@
 #include "Main.h"
 
+
 const char process[6] = "/proc/";
 
 FILE *memInfo;
@@ -13,6 +14,7 @@ int main (int argc, char *argv[])
   OpenFiles();
 
   ReadFile(&memInfo, memHead, 5);
+  PrintList(memHead);
 
   CloseFiles();
 }
