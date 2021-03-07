@@ -1,5 +1,6 @@
 #include "filemanager.h"
 
+
 void OpenFiles() 
 {
 
@@ -12,6 +13,7 @@ void OpenFiles()
 
   free(memoryFilePath);
 }
+
 
 static char* CombineFilePath(char *folder, char *filename)
 {
@@ -36,14 +38,14 @@ void ReadFile(FILE **filestream, struct Node* n, int lines)
 {
 
   char *buffer;
+  buffer = malloc(sizeof(char) * 255);
 
   for (int i = 0; i < lines; i++) {
 
+    fgets(buffer, 255, *filestream);
+    printf("%s", buffer);
+
   }
 
-
-  /*while (fgets(buffer, 255, *filestream)) {
-    printf("%s", buffer);
-  }*/
-
+  free(buffer);
 }

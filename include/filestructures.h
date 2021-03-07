@@ -6,7 +6,9 @@ struct Node {
 
     char data[255];
     struct Node* next;
-    
+
 };
+
+void AddNode(struct Node node, char data[255]);
 
 #endif
