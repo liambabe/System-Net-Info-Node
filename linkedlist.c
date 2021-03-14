@@ -9,6 +9,7 @@ void AddNode(struct Node *node, char data[255]) {
 
 }
 
+
 void PrintList(struct Node *node) {
 
     struct Node *currentNode = node;
