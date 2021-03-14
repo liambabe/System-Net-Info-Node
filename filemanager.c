@@ -1,16 +1,21 @@
 #include "filemanager.h"
 
+
 void OpenFiles() 
 {
 
   char *memoryFilePath = CombineFilePath(strdup(process), "meminfo");
   memInfo = fopen(memoryFilePath, "r");
+
+  char *cpuFilePath = CombineFilePath(strdup(process), "stat");
+  cpuInfo = fopen(cpuFilePath, "r");
   
-  if (!memInfo) {
-    printf("Failed to open memory file\n");
+  if (!memInfo || !cpuInfo) {
+    printf("Failed to open a file\n");
   }
 
   free(memoryFilePath);
+  free(cpuFilePath);
 }
 
 

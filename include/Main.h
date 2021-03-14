@@ -9,5 +9,8 @@
 extern const char process[6];
 
 extern FILE *memInfo;
+extern FILE *cpuInfo;
+
+void initDataLists ();
 
 #endif
