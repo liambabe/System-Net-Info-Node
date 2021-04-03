@@ -6,7 +6,7 @@
 #include "filemanager.h"
 #include "linkedlist.h"
 
-extern const char process[6];
+extern const char process[7];
 
 extern FILE *memInfo;
 extern FILE *cpuInfo;

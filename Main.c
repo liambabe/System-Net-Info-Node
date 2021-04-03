@@ -1,7 +1,7 @@
 #include "Main.h"
 
 
-const char process[6] = "/proc/";
+const char process[7] = "/proc/\0";
 
 FILE *memInfo;
 struct Node *memHead = NULL;
