@@ -44,13 +44,16 @@ void initSocket ()
 	server_addr.sin_port = htons(PORT);
 	server_addr.sin_addr.s_addr = inet_addr(SERVERIP);
 	int server_struct_length = sizeof(server_addr);
+	char msgBuffer[BUFLEN];
 
 	if(socket_desc < 0){
 		printf("Error while creating socket\n");
 	}
+
+	strcpy(msgBuffer, "hello world\0");
 	
 	// Send the message to server:
-	if(sendto(socket_desc, "UDP Message\0", BUFLEN, 0,
+	if(sendto(socket_desc, msgBuffer, BUFLEN, 0,
 			(struct sockaddr*)&server_addr, server_struct_length) < 0){
 		printf("Unable to send message\n");
 	}
