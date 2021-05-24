@@ -1,7 +1,9 @@
 #include "Main.h"
 
+//socket variables
 int socket_desc;
 struct sockaddr_in server_addr;
+char msgBuffer[BUFLEN];
 
 const char process[7] = "/proc/\0";
 
@@ -16,17 +18,35 @@ int main (int argc, char *argv[])
 	initDataLists();
 	initSocket();
 
-	OpenFiles();
 
-	ReadFile(&memInfo, memHead, 5);
-	ReadFile(&cpuInfo, cpuHead, 7);
+	for (int i = 0; i < 5; i++) {
+		OpenFiles();
 
-	PrintList(memHead);
-	PrintList(cpuHead);
+		ReadFile(&memInfo, memHead, 5);
+		ReadFile(&cpuInfo, cpuHead, 7);
 
-	CloseFiles();
+		PrintList(memHead);
+		PrintList(cpuHead);
+
+		CloseFiles();
+
+		CleanList(memHead);
+		CleanList(cpuHead);
+
+		sleep(1);
+	}
+
+		strcpy(msgBuffer, "hello world\0");
+		int server_struct_length = sizeof(server_addr);
+
+	// Send the message to server:
+	if(sendto(socket_desc, msgBuffer, BUFLEN, 0,
+			(struct sockaddr*)&server_addr, server_struct_length) < 0){
+		printf("Unable to send message\n");
+	}
+
+	close(socket_desc);
 }
-
 
 void initDataLists ()
 { 
@@ -43,21 +63,11 @@ void initSocket ()
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(PORT);
 	server_addr.sin_addr.s_addr = inet_addr(SERVERIP);
-	int server_struct_length = sizeof(server_addr);
-	char msgBuffer[BUFLEN];
 
 	if(socket_desc < 0){
 		printf("Error while creating socket\n");
 	}
 
-	strcpy(msgBuffer, "hello world\0");
-	
-	// Send the message to server:
-	if(sendto(socket_desc, msgBuffer, BUFLEN, 0,
-			(struct sockaddr*)&server_addr, server_struct_length) < 0){
-		printf("Unable to send message\n");
-	}
 
 
-	close(socket_desc);
 }

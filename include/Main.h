@@ -23,6 +23,9 @@ extern const char process[7];
 extern FILE *memInfo;
 extern FILE *cpuInfo;
 
+//socket variables
+extern char msgBuffer[BUFLEN];
+
 void initDataLists ();
 void initSocket ();
 

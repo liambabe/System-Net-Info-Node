@@ -15,5 +15,6 @@ struct Node {
 
 void AddNode(struct Node *node, char data[255]);
 void PrintList(struct Node *node);
+void CleanList(struct Node *node);
 
 #endif
