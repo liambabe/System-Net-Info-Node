@@ -5,56 +5,32 @@ int socket_desc;
 struct sockaddr_in server_addr;
 char msgBuffer[BUFLEN];
 
-const char process[7] = "/proc/\0";
-
-FILE *memInfo;
-struct Node *memHead = NULL;
-
-FILE *cpuInfo;
-struct Node *cpuHead = NULL;
-
 int main (int argc, char *argv[])
 {
 	initDataLists();
 	initSocket();
 
+	char *data;
+	data = malloc(sizeof(char) * 255);
+	int server_struct_length = sizeof(server_addr);
 
-	for (int i = 0; i < 5; i++) {
-		OpenFiles();
 
-		ReadFile(&memInfo, memHead, 5);
-		ReadFile(&cpuInfo, cpuHead, 7);
-
-		PrintList(memHead);
-		PrintList(cpuHead);
-
-		CloseFiles();
-
-		CleanList(memHead);
-		CleanList(cpuHead);
-
-		sleep(1);
-	}
-
+	while (1) {
+		ProcessData(data);
 		strcpy(msgBuffer, "hello world\0");
-		int server_struct_length = sizeof(server_addr);
 
-	// Send the message to server:
-	if(sendto(socket_desc, msgBuffer, BUFLEN, 0,
+		// Send the message to server:
+		if(sendto(socket_desc, msgBuffer, BUFLEN, 0,
 			(struct sockaddr*)&server_addr, server_struct_length) < 0){
-		printf("Unable to send message\n");
+			printf("Unable to send message\n");
+		}
+
+		memset(data, 0, (sizeof(char) * 255));
+		sleep(6);
 	}
 
+	free(data);
 	close(socket_desc);
-}
-
-void initDataLists ()
-{ 
-	memHead = (struct Node*) malloc(sizeof(struct Node));
-	strcpy(memHead->data, "Memory List");
-
-	cpuHead = (struct Node*) malloc(sizeof(struct Node));
-	strcpy(cpuHead->data, "CPU List");
 }
 
 void initSocket () 

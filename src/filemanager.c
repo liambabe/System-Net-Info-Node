@@ -1,6 +1,15 @@
 #include "filemanager.h"
 
 
+const char process[7] = "/proc/\0";
+
+FILE *memInfo;
+struct Node *memHead = NULL;
+
+FILE *cpuInfo;
+struct Node *cpuHead = NULL;
+
+
 void OpenFiles() 
 {
 
@@ -18,7 +27,6 @@ void OpenFiles()
 	free(cpuFilePath);
 }
 
-
 static char* CombineFilePath(char *folder, char *filename)
 {
 	//Combine file path and file name
@@ -31,13 +39,11 @@ static char* CombineFilePath(char *folder, char *filename)
 	return filePath;
 }
 
-
 void CloseFiles() 
 {
 	fclose(memInfo);
 	fclose(cpuInfo);
 }
-
 
 void ReadFile(FILE **filestream, struct Node* n, int lines) 
 {
@@ -53,4 +59,30 @@ void ReadFile(FILE **filestream, struct Node* n, int lines)
 		currentNode = currentNode->next;
 
 	}
+}
+
+void initDataLists ()
+{ 
+	memHead = (struct Node*) malloc(sizeof(struct Node));
+	strcpy(memHead->data, "Memory List");
+
+	cpuHead = (struct Node*) malloc(sizeof(struct Node));
+	strcpy(cpuHead->data, "CPU List");
+}
+
+char* ProcessData(char* data) {
+
+	OpenFiles();
+
+	ReadFile(&memInfo, memHead, 3);
+	ReadFile(&cpuInfo, cpuHead, 7);
+
+	ProcessMemoryFile(memHead, data);
+
+	CloseFiles();
+
+	CleanList(memHead);
+	CleanList(cpuHead);
+
+	return data;
 }

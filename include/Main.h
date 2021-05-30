@@ -9,6 +9,7 @@
 
 #include "filemanager.h"
 #include "linkedlist.h"
+#include "fileprocessors.h"
 
 
 //socket constants
@@ -16,17 +17,10 @@
 #define BUFLEN 512
 #define PORT 2115
 
-//process directory
-extern const char process[7];
-
-//file pointers
-extern FILE *memInfo;
-extern FILE *cpuInfo;
-
 //socket variables
 extern char msgBuffer[BUFLEN];
 
-void initDataLists ();
 void initSocket ();
+
 
 #endif
