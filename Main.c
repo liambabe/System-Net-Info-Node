@@ -17,7 +17,7 @@ int main (int argc, char *argv[])
 
 	while (1) {
 		ProcessData(data);
-		strcpy(msgBuffer, "hello world\0");
+		strcpy(msgBuffer, data);
 
 		// Send the message to server:
 		if(sendto(socket_desc, msgBuffer, BUFLEN, 0,
@@ -26,7 +26,7 @@ int main (int argc, char *argv[])
 		}
 
 		memset(data, 0, (sizeof(char) * 255));
-		sleep(6);
+		sleep(3);
 	}
 
 	free(data);

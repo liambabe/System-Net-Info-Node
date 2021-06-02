@@ -14,7 +14,7 @@
 
 //socket constants
 #define SERVERIP "127.0.0.1"
-#define BUFLEN 512
+#define BUFLEN 255
 #define PORT 2115
 
 //socket variables
